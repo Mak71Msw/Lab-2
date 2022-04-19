@@ -39,9 +39,9 @@ public:
         surname = new char[10];
         strcpy(surname,"surname");
         name = new char[10];
-        strcpy(name,"surname");
+        strcpy(name,"name");
         patronymic = new char[10];
-        strcpy(patronymic,"surname");
+        strcpy(patronymic,"patronymic");
     }
 //    ~fio()
 //    {

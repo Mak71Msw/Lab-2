@@ -45,7 +45,6 @@ char * CheckSurname(){
     int i;
     char *str;
     str = new char[40];
-    char *Obj = new char[40];
     do{
         cout<<"Фамилия: ";
         cin>>str;
@@ -55,10 +54,9 @@ char * CheckSurname(){
         if(str[i])
             cout<<"Зачем вы ввели не буквы..."<<endl<<"Повторите ввод!!!"<<endl;
     }while(str[i]);
-
-    for (i = 0; str[i]; i++){
-        Obj[i]+=str[i];
-    }
+    char* Obj = new char[strlen(str)+1];
+    strcpy(Obj, str);
+    delete[] str;
     return Obj;
 }
 
@@ -66,7 +64,6 @@ char * CheckName(){
     int i;
     char *str;
     str = new char[40];
-    char *Obj = new char[40];
     do{
         cout<<"Имя: ";
         cin>>str;
@@ -77,9 +74,9 @@ char * CheckName(){
             cout<<"Зачем вы ввели не буквы..."<<endl<<"Повторите ввод!!!"<<endl;
     }while(str[i]);
 
-    for (i = 0; str[i]; i++){
-        Obj[i]+=str[i];
-    }
+    char* Obj = new char[strlen(str)+1];
+    strcpy(Obj, str);
+    delete[] str;
     return Obj;
 }
 
@@ -87,7 +84,6 @@ char * CheckPatronymic(){
     int i;
     char *str;
     str = new char[40];
-    char *Obj = new char[40];
     do{
         cout<<"Отчество: ";
         cin>>str;
@@ -98,18 +94,18 @@ char * CheckPatronymic(){
             cout<<"Зачем вы ввели не буквы..."<<endl<<"Повторите ввод!!!"<<endl;
     }while(str[i]);
 
-    for (i = 0; str[i]; i++){
-        Obj[i]+=str[i];
-    }
+    char* Obj = new char[strlen(str)+1];
+    strcpy(Obj, str);
+    delete[] str;
     return Obj;
 }
 
 void Input(clinic* Obj,int amount)
 {
-    Obj[amount].setSpec(CheckQual()) ;
+    Obj[amount].setSpec(CheckSpec()) ;
     cin.get();
 
-    Obj[amount].setQual(CheckSpec()) ;
+    Obj[amount].setQual(CheckQual()) ;
     cin.get();
 
     Obj[amount].fio_class.setSurname((CheckSurname()));
@@ -144,6 +140,8 @@ void Search(clinic* Obj, int amount)
 
     st << "Surname" << "Name" << "Patronymic" << "Specialty" << "Qualification";
 
+    bool no_any = true;
+
     for (int i = 0; i < amount; i++)
     {
         if (strcmp(Obj[i].fio_class.GetSurname(), n) == 0 and strcmp(Obj[i].fio_class.GetName(), m) == 0 and strcmp(Obj[i].fio_class.GetPatronymic(), l) == 0)
@@ -151,7 +149,13 @@ void Search(clinic* Obj, int amount)
             st << Obj[i].fio_class.GetSurname() << Obj[i].fio_class.GetName()
                << Obj[i].fio_class.GetPatronymic() << Obj[i].GetSpec()
                << Obj[i].GetQual();
+            no_any = false;
         }
+    }
+    if (no_any)
+    {
+        st << "surname"  << "name" << "patronymic" << "0" << "0";
+        cout<<"Таких кентов тут нет"<<endl<<endl;
     }
 }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -176,6 +180,8 @@ void Filter(clinic* Obj, int amount)
 
     st << "Surname" << "Name" << "Patronymic" << "Specialty" << "Qualification";
 
+    bool no_any = true;
+
     for (int i = 0; i < amount; i++)
     {
         if (Obj[i].GetSpec() == s && Obj[i].GetQual() == q)
@@ -183,52 +189,17 @@ void Filter(clinic* Obj, int amount)
             st << Obj[i].fio_class.GetSurname() << Obj[i].fio_class.GetName()
                << Obj[i].fio_class.GetPatronymic() << Obj[i].GetSpec()
                << Obj[i].GetQual();
+            no_any = false;
         }
+    }
+    if (no_any)
+    {
+        st << "surname"  << "name" << "patronymic" << "0" << "0";
+        cout<<"Таких кентов тут нет"<<endl<<endl;
     }
 }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-void Sorted(clinic* Obj, int amount)
-{
-//    char a[40];
-//    char b[40];
-//    char c[40];
-//    int d;
-//    int e;
-//
-//    CheckSurname();
-//    cin.getline(a, 40, '\n');
-//    CheckName();
-//    cin.getline(b, 40, '\n');
-//    CheckPatronymic();
-//    cin.getline(c, 40, '\n');
-//    d=CheckSpec();
-//    e=CheckQual();
-//
-//    for (int i = 0; i < amount - 1; i++)
-//        for(int j=i+1;j<amount;j++)
-//        {
-//            if(strcmp(Obj[i].fio_class.GetSurname(),Obj[j].fio_class.GetSurname())>0)
-//            {   strcpy(a,Obj[i].fio_class.GetSurname());
-//                strcpy(Obj[i].fio_class.GetSurname(),Obj[j].fio_class.GetSurname());
-//                strcpy(Obj[j].fio_class.GetSurname(),a);
-//
-//                strcpy(b,Obj[i].fio_class.GetName());
-//                strcpy(Obj[i].fio_class.GetName(),Obj[j].fio_class.GetName());
-//                strcpy(Obj[j].fio_class.GetName(),b);
-//
-//                strcpy(c,Obj[i].fio_class.GetPatronymic());
-//                strcpy(Obj[i].fio_class.GetPatronymic(),Obj[j].fio_class.GetPatronymic());
-//                strcpy(Obj[j].fio_class.GetPatronymic(),c);
-//
-//                d = Obj[i].GetSpec();
-//                Obj[i].GetSpec() = Obj[j].GetSpec();
-//                Obj[j].GetSpec() = d;
-//
-//                e = Obj[i].GetQual();
-//                Obj[i].GetQual() = Obj[j].GetQual();
-//                Obj[j].GetQual() = e;
-//            }
-//        }
+void Sorted(clinic* &Obj, int amount) {
 
     clinic tmp;
 
@@ -256,11 +227,9 @@ void Sorted(clinic* Obj, int amount)
 
     for (int i = 0; i < amount; i++)
     {
-        {
             st << Obj[i].fio_class.GetSurname() << Obj[i].fio_class.GetName()
                << Obj[i].fio_class.GetPatronymic() << Obj[i].GetSpec()
                << Obj[i].GetQual();
-        }
     }
 }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -297,6 +266,7 @@ void Read(clinic* &Obj, int amount, string filename) {
             char* patronymic;
 
             reading >> specialty >> qualification >> surname >> name >> patronymic;
+
             Obj[i].setSpec(specialty);
             Obj[i].setQual(qualification);
             Obj[i].fio_class.setSurname(surname);
@@ -306,7 +276,7 @@ void Read(clinic* &Obj, int amount, string filename) {
     }
     myfile.close();
     clinic::count=amount;
-    cout<<"Количество считанных объектов: "<<clinic::count<<"\n";
+    cout<<"Количество врачей: "<<clinic::count<<"\n";
 }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 void Save(clinic* Obj, int amount, string filename){
