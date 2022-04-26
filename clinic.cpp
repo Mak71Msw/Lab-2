@@ -261,17 +261,18 @@ void Read(clinic* &Obj, int amount, string filename) {
         {
             int specialty;
             int qualification;
-            char* surname;
-            char* name;
-            char* patronymic;
+            char surname[20];
+            char name[20];
+            char patronymic[20];
 
-            reading >> specialty >> qualification >> surname >> name >> patronymic;
+            reading >> surname >> name >> patronymic >> specialty >> qualification;
 
-            Obj[i].setSpec(specialty);
-            Obj[i].setQual(qualification);
             Obj[i].fio_class.setSurname(surname);
             Obj[i].fio_class.setName(name);
             Obj[i].fio_class.setPatronymic(patronymic);
+            Obj[i].setSpec(specialty);
+            Obj[i].setQual(qualification);
+
         }
     }
     myfile.close();
@@ -287,9 +288,9 @@ void Save(clinic* Obj, int amount, string filename){
     {
         for (int i=0; i<amount; i++)
         {
-            record << Obj[i].GetSpec()<<" "<< Obj[i].GetQual()<<" "
-            <<Obj[i].fio_class.GetSurname()<<" "<<Obj[i].fio_class.GetName()<<" "
-            <<Obj[i].fio_class.GetPatronymic()<<endl;
+            record << Obj[i].fio_class.GetSurname()<<" "<< Obj[i].fio_class.GetName()<<" "
+                    <<Obj[i].fio_class.GetPatronymic()<<" "<<Obj[i].GetSpec()<<" "
+                    <<Obj[i].GetQual()<<endl;
         }
     }
 

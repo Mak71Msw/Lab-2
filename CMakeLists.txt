@@ -3,4 +3,4 @@ project(_2)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_executable(_2 main.cpp clinic.h clinic.cpp StreamTable.h clinic_box.h fio.cpp fio.h)
+add_executable(_2 main.cpp clinic.h clinic.cpp StreamTable.h clinic_box.h fio.h)
