@@ -41,8 +41,8 @@ public:
     {
 
         StreamTable st(std::cout);
-        st.AddCol(12);
-        st.AddCol(10);
+        st.AddCol(15);
+        st.AddCol(15);
         st.AddCol(15);
         st.AddCol(15);
         st.AddCol(15);

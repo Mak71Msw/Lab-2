@@ -199,16 +199,27 @@ void Filter(clinic* Obj, int amount)
     }
 }
 //~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-void Sorted(clinic* &Obj, int amount) {
+void Sorted( clinic* Obj, int amount) {
 
     clinic tmp;
 
-    for (int i = 0; i < amount - 1; i++) {
-        for (int j = i + 1; j < amount; j++) {
-            if (strcmp(Obj[i].fio_class.GetSurname(), Obj[j].fio_class.GetSurname()) > 0) {
-                tmp = Obj[i];
-                Obj[i] = Obj[j];
-                Obj[j] = tmp;
+//    for (int i = 0; i < amount - 1; i++) {
+//        for (int j = i + 1; j < amount; j++) {
+//            if (strcmp(Obj[i].fio_class.GetSurname(), Obj[j].fio_class.GetSurname()) > 0) {
+//                tmp = Obj[i];
+//                Obj[i] = Obj[j];
+//                Obj[j] = tmp;
+//            }
+//        }
+//    }
+
+    for (int i = 0 ; i < amount -1; i++)
+    {
+        for (int j = 0; j < amount; j++)
+        {
+            if (strcmp(Obj[j].fio_class.GetSurname(), Obj[j+1].fio_class.GetSurname()) > 0)
+            {
+                swap(Obj[i],Obj[j]);
             }
         }
     }
@@ -261,9 +272,9 @@ void Read(clinic* &Obj, int amount, string filename) {
         {
             int specialty;
             int qualification;
-            char surname[20];
-            char name[20];
-            char patronymic[20];
+            char surname[32];
+            char name[32];
+            char patronymic[32];
 
             reading >> surname >> name >> patronymic >> specialty >> qualification;
 

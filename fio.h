@@ -20,18 +20,18 @@ public:
 
     void setSurname(char* new_surname)
     {
-        surname = new char[15];
-        surname = new_surname;
+        surname = new char[32];
+        strcpy(surname, new_surname);
     }
     void setName(char* new_name)
     {
-        name = new char[15];
-        name = new_name;
+        name = new char[32];
+        strcpy(name, new_name);
     }
     void setPatronymic(char* new_patronymic)
     {
-        patronymic = new char[15];
-        patronymic = new_patronymic;
+        patronymic = new char[32];
+        strcpy(patronymic, new_patronymic);
     }
 
     fio()
@@ -43,10 +43,6 @@ public:
         patronymic = new char[10];
         strcpy(patronymic,"patronymic");
     }
-//    ~fio()
-//    {
-//        cout<<"Память почистилась"<<endl;
-//    }
 
 };
 
