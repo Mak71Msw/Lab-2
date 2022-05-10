@@ -48,7 +48,7 @@ public:
     friend void Search(clinic* Obj, int amount);
     friend void Input(clinic* Obj,int amount);
     friend void Filter(clinic* Obj, int amount);
-    friend void Sorted(clinic* Obj, int amount);
+    friend void Sorted(clinic* &Obj, int amount);
     friend void Save(clinic* Obj, int amount, string filename);
     friend void Read(clinic* &Obj, int amount, string filename);
 };

@@ -58,7 +58,6 @@ public:
             << MyClinic_ARRAY[i].fio_class.GetPatronymic() << MyClinic_ARRAY[i].GetSpec()
             << MyClinic_ARRAY[i].GetQual();
         }
-
     }
 
     ~clinic_box(){
